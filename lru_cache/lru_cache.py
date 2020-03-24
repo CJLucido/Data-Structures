@@ -21,7 +21,7 @@ class LRUCache:
         self.nodes_dict = {}
         self.num_nodes_contained = len(self.nodes_dict)
 
-        pass
+        
 
     """
     Retrieves the value associated with the given key. Also
@@ -47,8 +47,17 @@ class LRUCache:
                     #move to front should already delete it from it's prior location
             #return capturedValue
         # else
+            #return None
+        if key in self.nodes_dict:
+            capturedValue = self.nodes_dict[key]
+            current_node = self.nodes_storage.head
+            while current_node.value != key:
+                current_node = current_node.next
+            self.nodes_storage.move_to_front(current_node)
+            return capturedValue
+        else:
             return None
-        pass
+        
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -61,12 +70,27 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
+        if key not in self.nodes_dict:
+            if int(len(self.nodes_dict)) == self.num_nodes_max:
+                key_to_delete = self.nodes_storage.remove_from_tail() #this SHOULD return the value
+                del self.nodes_dict[key_to_delete]
+            self.nodes_storage.add_to_head(key)
+            self.nodes_dict[key] = value
+        else:
+            self.nodes_dict[key] = value
+            current_node = self.nodes_storage.head
+            
+            while current_node.value != key:
+                current_node = current_node.next
+            self.nodes_storage.move_to_front(current_node)
+
         #add the key value pair to the dictionary
             #if key doesn't exist 
                 #if the length of the dictionary equals the max
                     #remove the tail
                     #remove the pair associated with the key returned from the tail from the dictionary
                 #add the key to the head  (see below as to why we aren't using the k-v pair)
+                #add the key value pair to the dictionary
             #else overwrite the value of the key in the dictionary
                 #it will be easier to not find the value associated with this key in the "middle" of the dll so the dll must only care about the key values
                 # move the node with this value to the front (we have to find values in the middle here)
@@ -74,4 +98,4 @@ class LRUCache:
                     #move that entire node to the front (move_to_front(the node that was found))
                         #if that doesn't work call The ListNode's delete method and add the node to the head using the dll.add_to_head
                         #move to front should already delete it from it's prior location
-        pass
+        
