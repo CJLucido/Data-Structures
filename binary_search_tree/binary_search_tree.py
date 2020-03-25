@@ -12,21 +12,66 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        if self.value == None:
+            self.value = value
+            return
+        if value < self.value:
+            if not self.left:
+                self.left = BinarySearchTree(value)
+            else:
+                self.left.insert(value)
+        elif value >= self.value: # the tests require us to put dupes to the right but we could put them to the left if we wanted
+            if not self.right:
+                self.right = BinarySearchTree(value)
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        if self.value == None:
+            return False
+        if self.value == target:
+            return True
+        elif target < self.value:
+            if not self.left:
+                return False
+            else:
+                return self.left.contains(target)
+        elif target > self.value:
+            if not self.right:
+                return False
+            else: 
+                return self.right.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        if self.value == None:
+            return "not instantiated"     
+        elif self.right:
+            return self.right.get_max()
+        else:
+            return self.value
+        
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        if self.value == None:
+            return "not instantiated"  
+        else:
+            cb(self.value)
+
+        if not self.left and not self.right:
+            return
+        elif not self.right:
+            self.left.for_each(cb)
+        elif not self.left:
+            self.right.for_each(cb)
+        else:#at this point we know both exist
+            self.left.for_each(cb)
+            self.right.for_each(cb)
+        # pass
 
     # DAY 2 Project -----------------------
 

@@ -99,3 +99,11 @@ class LRUCache:
                         #if that doesn't work call The ListNode's delete method and add the node to the head using the dll.add_to_head
                         #move to front should already delete it from it's prior location
         
+
+#the correct way to do the set is actually:
+# create the node if it doesn't exist
+# to store the node in the cache/dictionary but associate it with the key (even though the key is in teh node itself)
+#increase the size
+# then you can move the node around as you need to, returning the key or value, passing it to the dll move functions, removing it from locations etc
+# a new node can be created to replace the old one, you don't have to actually change the node in place
+
