@@ -88,22 +88,63 @@ class BinarySearchTree:
 
 
     def in_order_print(self, node):
-        # depth_stack = []
-        # depth_stack.append(node) 
-        # while depth_stack != []:
-        #     node = depth_stack.pop(-1)
-        #     sys.stdout.write(str(node.value) + "\n") #change to sort somehow
-        #     if node.left:
-        #         depth_stack.append(node.left)
-        #     if node.right:
-        #         depth_stack.append(node.right)
-        pass
+        if node:
+            node.in_order_print(node.left)
+            print(node.value)
+            node.in_order_print(node.right)        
+# all we want to do is at every node we check right, self, left -> into the stack
+# when there isn't left we remove that value from the stack
+# we check the right, if there is something there we do the same thing
+# then we go to the new leftmost value, should be the top of the stack and return that value as well
+# at this point we dont want to check left, only right
+# on the right value we want to start the process over again
+# once we can't go right we want to return to the root
+# then we want to go right and repeat the process until the stack is empty
+
+# if node.left:
+#     #we only care about right after we've exhausted left
+#     # add the left to the backburner
+#     #go left
+# else:
+#     if node.right:
+    # add right node to stack
+    #go right 
+
+    #pop the previous node off the stack because it was the lowest
+    # then you gotta check if there's a left for that right_node (recursion here)
+    #after we are done with that we move to the previous member of the stack and only check its right (helper function? if it has a right we do recursion on that)
+    # else:
+    #     #print the node you are on
+    #     #go back and print that node as well
+    #     #helper function to move to the right of that node? (check the 2 for a 3 and if there call this function, if not just print this node value and move to the previous left most in the stack...we can't do pur recursion on that one either!!!!!)
+    #         #recursion
+
+
+    #     depth_stack = []
+    #     #depth_stack.append(node) #we don't want to append the root to the stack do we? lower numbers will be above it
+    #     while depth_stack != []:
+    #         #node = depth_stack[-1]#pop doesn't happen until it has no left values (all the left values have been processed by recursion), BUT we still need to use the top of the stack to continue traversing
+    #         if node.right:
+    #             depth_stack.append(node.right)
+    #         if node.left:
+    #             depth_stack.append(node.left)  
+    #             node.in_order_print(node.left)            
+    #         else:
+    #             node = depth_stack.pop(-1)
+    #             if node.right:
+    #                 print(node.value)
+    #                 node.in_order_print(node.right)
+    #             else:
+    #                 node = depth_stack.pop(-1)
+    #                 print(node.value)
+                
+        # pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
 
         #     Iterative BFT
-        # creeate queue
+        # create queue
         # add root to queue
         # while queue is not empty
         # node = pop head of queue
@@ -142,20 +183,15 @@ class BinarySearchTree:
     def dft_print(self, node):
         depth_stack = []
         depth_stack.append(node) 
-        output_for_tests = ""
+
         while depth_stack != []:
             node = depth_stack.pop(-1)
-            output_for_tests += (str(node.value)+"\\n")
-            
-            # sys.stdout.write(str(node.value))
-            # print(sys.stdout(output_for_tests))
-            #print(output_for_tests)
             print(node.value)
             if node.left:
                 depth_stack.append(node.left)
             if node.right:
                 depth_stack.append(node.right)
-        # print(output_for_tests)
+        
         
 
     # STRETCH Goals -------------------------

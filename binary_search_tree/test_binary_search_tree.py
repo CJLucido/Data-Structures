@@ -17,7 +17,8 @@ class BinarySearchTreeTests(unittest.TestCase):
         # self.bst.insert(8)#added
         self.assertEqual(self.bst.left.right.value, 3)
         self.assertEqual(self.bst.right.left.value, 6)
-
+        # self.bst.dft_print(self.bst)
+        # self.bst.in_order_print(self.bst)
         
     def test_handle_dupe_insert(self):
         self.bst2 = BinarySearchTree(1)
@@ -80,10 +81,10 @@ class BinarySearchTreeTests(unittest.TestCase):
         self.bst.insert(4)
         self.bst.insert(2)
 
-        # self.bst.in_order_print(self.bst)
+        self.bst.in_order_print(self.bst)
 
-        # output = sys.stdout.getvalue()
-        # self.assertEqual(output, "1\n2\n3\n4\n5\n6\n7\n8\n")
+        output = sys.stdout.getvalue()
+        self.assertEqual(output, "1\n2\n3\n4\n5\n6\n7\n8\n")
 
         sys.stdout = io.StringIO()
         self.bst.bft_print(self.bst)
