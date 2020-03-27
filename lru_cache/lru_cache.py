@@ -107,3 +107,35 @@ class LRUCache:
 # then you can move the node around as you need to, returning the key or value, passing it to the dll move functions, removing it from locations etc
 # a new node can be created to replace the old one, you don't have to actually change the node in place
 
+
+# def __init__(self, limit=10):
+#         self.limit = limit
+#         self.length = 0
+#         self.cache = {}
+#         self.storage = DoublyLinkedList()
+
+
+  
+#     def get(self, key):
+#         if key not in self.cache:
+#             return None
+        
+#         node = self.cache[key]
+#         self.storage.move_to_end(node)
+#         return node.value[1]
+
+
+#     def set(self, key, value):
+#         if key in self.cache:
+#             node = self.cache[key]
+#             self.storage.move_to_end(node)
+#             node.value = [key,value]
+#         else:
+#             if self.limit == self.length:
+#                 key_value = self.storage.remove_from_head()
+#                 del self.cache[key_value[0]]
+            
+#             self.length += 1
+#             self.storage.add_to_tail([key,value])
+#             self.cache[key] = self.storage.tail
+            
